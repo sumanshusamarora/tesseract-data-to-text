@@ -38,8 +38,7 @@ def generate_text_from_ocr_output(
             )
             ignore_index += line_index
             line_indexes.append(line_index)
-
-    all_tops = [ocr_dataframe.iloc[index_l[0]]["top"] for index_l in line_indexes]
+    all_tops = ocr_dataframe[ocr_dataframe.index.isin([index_l[0] for index_l in line_indexes])]["top"]
     line_indexes = [line_indexes[ind] for ind in np.argsort(all_tops)]
 
     text_list = [
